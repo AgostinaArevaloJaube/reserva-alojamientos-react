@@ -44,10 +44,33 @@ const CardContainer = styled.section`
 		background-color: #e7315d;
 		border: none;
 	}
-`;
 
-const Location = styled.div`
-	display: flex;
+	.locactionContainer {
+		margin: 4%;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.iconContainer {
+		width: 70%;
+		display: flex;
+		align-items: center;
+		padding: 0.5rem;
+	}
+
+	.icon {
+		width: 20%;
+		height: 1.5rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: #e7315d;
+		border-radius: 5px;
+	}
+
+	.price {
+		width: 90%;
+	}
 `;
 
 function Card(props) {
@@ -59,42 +82,53 @@ function Card(props) {
 				<h1 className="title">{props.name}</h1>
 				<p>{props.description}</p>
 
-				<Location>
-					<span>
-						<FontAwesomeIcon icon={faMapMarkerAlt} />
-					</span>
-					<p>
-						{props.city}, {props.country}
-					</p>
-				</Location>
+				<section className="locactionContainer">
+					<div className="iconContainer">
+						<span className="icon">
+							<FontAwesomeIcon
+								icon={faMapMarkerAlt}
+								color="white"
+							/>
+						</span>
+						<p className="text">
+							{props.city}, {props.country}
+						</p>
+					</div>
 
-				<Location>
-					<span>
-						<FontAwesomeIcon icon={faBed} />
-					</span>
-					<p>{props.rooms} Habitaciones</p>
-				</Location>
+					<div className="iconContainer">
+						<span className="icon">
+							<FontAwesomeIcon icon={faBed} color="white" />
+						</span>
+						<p>{props.rooms} Habitaciones</p>
+					</div>
 
-				<Location>
-					{/* {props.price} */}
-					{/* Acá hay que hacer cambiar de color a cada $ dependiendo el precio */}
-					<span>
-						<FontAwesomeIcon
-							icon={faDollarSign}
-							color="ligthGray"
-						/>
-						<FontAwesomeIcon
-							icon={faDollarSign}
-							color="ligthGray"
-						/>
-						<FontAwesomeIcon
-							icon={faDollarSign}
-							color="ligthGray"
-						/>
-						<FontAwesomeIcon icon={faDollarSign} color="gray" />
-						<FontAwesomeIcon icon={faDollarSign} color="gray" />
-					</span>
-				</Location>
+					<div className="iconContainer price">
+						{/* {props.price} */}
+						{/* Acá hay que hacer cambiar de color a cada $ dependiendo el precio */}
+						<span className="icon">
+							<FontAwesomeIcon
+								icon={faDollarSign}
+								color="white"
+							/>
+							<FontAwesomeIcon
+								icon={faDollarSign}
+								color="white"
+							/>
+							<FontAwesomeIcon
+								icon={faDollarSign}
+								color="white"
+							/>
+							<FontAwesomeIcon
+								icon={faDollarSign}
+								color="white"
+							/>
+							<FontAwesomeIcon
+								icon={faDollarSign}
+								color="white"
+							/>
+						</span>
+					</div>
+				</section>
 			</section>
 
 			<button className="button">Reservar</button>
