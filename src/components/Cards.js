@@ -22,6 +22,13 @@ const CardsContainer = styled.section`
 `;
 
 function Cards() {
+
+	/*
+		1- Traer el estado
+		2 - Hacer ifs anidados que comparen el estado actual vs hotelsDate (en precio, ) CON MAP
+		3 - 
+	*/
+
 	return (
 		<CardsContainer>
 			{hotelsData.map((hotelData) => (

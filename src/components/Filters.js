@@ -1,4 +1,7 @@
-import React from 'react';
+// Acá importar el el state y el usecontext
+import React, { useContext } from 'react';
+import { FilterContext } from './FilterContext';
+
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -8,6 +11,7 @@ import {
 	faBed,
 	faDollarSign
 } from '@fortawesome/free-solid-svg-icons';
+
 
 const Navbar = styled.nav`
 	margin: 0 auto;
@@ -52,22 +56,30 @@ const Filter = styled.section`
 	}
 `;
 
-function Filters() {
+const Filters = () => {
+	const [filter, setFilter] = useContext(FilterContext);
+
+	const handleFilters = (event) => {
+		const { name, value } = event.target;
+		const newData = { ...filter, [name]: value };
+		setFilter(newData);
+	};
+
 	return (
 		<Navbar>
 			<Filter>
 				<FontAwesomeIcon icon={faSignInAlt} color="#a3a2a2" />
-				<input type="date" />
+				<input type="date" name="checkIn" onChange={handleFilters} />
 			</Filter>
 
 			<Filter>
 				<FontAwesomeIcon icon={faSignOutAlt} color="#a3a2a2" />
-				<input type="date" />
+				<input type="date" name="checkOut" onChange={handleFilters} />
 			</Filter>
 
 			<Filter>
 				<FontAwesomeIcon icon={faGlobe} color="#a3a2a2" />
-				<select name="countries">
+				<select name="country" onChange={handleFilters}>
 					<option>Todos los Paises</option>
 					<option>Argentina</option>
 					<option>Brasil</option>
@@ -78,18 +90,18 @@ function Filters() {
 
 			<Filter>
 				<FontAwesomeIcon icon={faDollarSign} color="#a3a2a2" />
-				<select name="prices">
+				<select name="price" onChange={handleFilters}>
 					<option>Cualquier precio</option>
-					<option>$</option>
-					<option>$$</option>
-					<option>$$$</option>
-					<option>$$$$</option>
+					<option value="1">$</option>
+					<option value="2">$$</option>
+					<option value="3">$$$</option>
+					<option value="4">$$$$</option>
 				</select>
 			</Filter>
 
 			<Filter>
 				<FontAwesomeIcon icon={faBed} color="#a3a2a2" />
-				<select name="hotel-size">
+				<select name="size" onChange={handleFilters}>
 					<option>Cualquier tamaño</option>
 					<option>Hotel pequeño</option>
 					<option>Hotel mediano</option>
@@ -98,6 +110,6 @@ function Filters() {
 			</Filter>
 		</Navbar>
 	);
-}
+};
 
 export default Filters;

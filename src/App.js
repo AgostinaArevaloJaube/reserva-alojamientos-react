@@ -3,15 +3,18 @@ import React from 'react';
 import Header from './components/Header';
 import Filters from './components/Filters';
 import Cards from './components/Cards';
+import { FilterProvider } from './components/FilterContext';
 
-function App() {
+const App = () => {
 	return (
-		<React.Fragment>
-			<Header />
-			<Filters />
-			<Cards />
-		</React.Fragment>
+		<>
+			<FilterProvider>
+				<Header />
+				<Filters />
+				<Cards />
+			</FilterProvider>
+		</>
 	);
-}
+};
 
 export default App;
