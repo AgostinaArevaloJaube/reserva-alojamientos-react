@@ -1,14 +1,15 @@
 import React, { useState, createContext } from 'react';
+import moment from 'moment';
 
 export const FilterContext = createContext();
 
 export const FilterProvider = (props) => {
 	const [filter, setFilter] = useState({
-		checkIn: 'hola',
-		checkOut: 'hola',
-		country: 'hola',
-		price: 'react',
-		size: 'mmgvo'
+		checkIn: moment(),
+		checkOut: moment().add(1, 'days'),
+		country: undefined,
+		price: undefined,
+		size: undefined
 	});
 
 	return (
