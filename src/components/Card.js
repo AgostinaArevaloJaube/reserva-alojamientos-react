@@ -6,14 +6,21 @@ import {
 	faBed,
 	faDollarSign
 } from '@fortawesome/free-solid-svg-icons';
+//const format = moment().format('dddd[,] D [de] MMMM [de] YYYY');
 
 const CardContainer = styled.section`
 	margin: 2%;
-	width: 25%;
+	width: 28%;
 	height: 100%;
-	border-radius: 3px;
-	border: 2px solid #a3a2a2;
+	border-radius: 4px;
+	border: 2px solid #dbdbdb;
 	box-shadow: 5px 5px 29px 7px rgba(199, 199, 199, 0.71);
+
+	@media (max-width: 1000px) {
+		width: 40%;
+		margin: 2% auto;
+		justify-content: center;
+	}
 
 	@media (max-width: 768px) {
 		width: 80%;
@@ -28,12 +35,17 @@ const CardContainer = styled.section`
 	}
 
 	.title {
-		font-size: 1.5em;
+		font-size: 1.2em;
 		margin-bottom: 0.5rem;
+	}
+
+	p {
+		font-size: 0.9em;
 	}
 
 	.image {
 		width: 100%;
+		border-radius: 4px;
 	}
 
 	.button {
@@ -41,7 +53,7 @@ const CardContainer = styled.section`
 		color: white;
 		font-size: 1.1em;
 		width: 100%;
-		background-color: #e7315d;
+		background-color: #457b9d;
 		border: none;
 	}
 
@@ -49,27 +61,67 @@ const CardContainer = styled.section`
 		margin: 4%;
 		display: flex;
 		flex-direction: column;
+
+		p {
+			text-align: center;
+		}
 	}
 
 	.iconContainer {
-		width: 70%;
+		width: 90%;
 		display: flex;
 		align-items: center;
 		padding: 0.5rem;
+
+		p {
+			padding: 0.3em;
+		}
+
+		@media (max-width: 1200px) {
+			width: 90%;
+			flex-direction: column;
+		}
 	}
 
 	.icon {
-		width: 20%;
+		width: 18%;
 		height: 1.5rem;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		background-color: #e7315d;
+		background-color: #457b9d;
 		border-radius: 5px;
 	}
 
 	.price {
-		width: 90%;
+		width: 100%;
+		margin: 0 auto;
+		padding: 0.5rem;
+
+		@media (max-width: 1200px) {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+	}
+
+	.priceIcon {
+		width: 25%;
+		height: 1.5rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: #457b9d;
+		border-radius: 5px;
+
+		@media (max-width: 1200px) {
+			width: 35%;
+		}
+	}
+
+	.size {
+		font-size: 17px;
+		padding: 1px;
 	}
 `;
 
@@ -102,29 +154,37 @@ function Card(props) {
 						<p>{props.rooms} Habitaciones</p>
 					</div>
 
-					<div className="iconContainer price">
-						{/* {props.price} */}
-						{/* Acá hay que hacer cambiar de color a cada $ dependiendo el precio */}
-						<span className="icon">
+					{/* <p>
+						Disponible desde {format(props.availabilityFrom)} hasta{' '}
+						{props.availabilityTo}
+					</p> */}
+
+					<div className="price">
+						<span className="priceIcon">
 							<FontAwesomeIcon
 								icon={faDollarSign}
-								color="white"
+								color={props.price > 0 ? 'white' : '#cccccc'}
+								className="size"
 							/>
 							<FontAwesomeIcon
 								icon={faDollarSign}
-								color="white"
+								color={props.price > 1 ? 'white' : '#cccccc'}
+								className="size"
 							/>
 							<FontAwesomeIcon
 								icon={faDollarSign}
-								color="white"
+								color={props.price > 2 ? 'white' : '#cccccc'}
+								className="size"
 							/>
 							<FontAwesomeIcon
 								icon={faDollarSign}
-								color="white"
+								color={props.price > 3 ? 'white' : '#cccccc'}
+								className="size"
 							/>
 							<FontAwesomeIcon
 								icon={faDollarSign}
-								color="white"
+								color={props.price > 4 ? 'white' : '#cccccc'}
+								className="size"
 							/>
 						</span>
 					</div>
