@@ -6,7 +6,10 @@ import {
 	faBed,
 	faDollarSign
 } from '@fortawesome/free-solid-svg-icons';
-//const format = moment().format('dddd[,] D [de] MMMM [de] YYYY');
+// Moment.js
+import moment from 'moment';
+import 'moment/locale/es';
+const format = 'dddd[,] D [de] MMMM [de] YYYY';
 
 const CardContainer = styled.section`
 	margin: 2%;
@@ -154,36 +157,32 @@ function Card(props) {
 						<p>{props.rooms} Habitaciones</p>
 					</div>
 
-					{/* <p>
-						Disponible desde {format(props.availabilityFrom)} hasta{' '}
-						{props.availabilityTo}
-					</p> */}
+					<p>
+						Disponible desde{' '}
+						{moment(props.availabilityFrom).format(format)} hasta{' '}
+						{moment(props.availabilityFrom).format(format)}
+					</p>
 
 					<div className="price">
 						<span className="priceIcon">
 							<FontAwesomeIcon
 								icon={faDollarSign}
-								color={props.price > 0 ? 'white' : '#cccccc'}
+								color={props.price >= 1 ? 'white' : '#cccccc'}
 								className="size"
 							/>
 							<FontAwesomeIcon
 								icon={faDollarSign}
-								color={props.price > 1 ? 'white' : '#cccccc'}
+								color={props.price >= 2 ? 'white' : '#cccccc'}
 								className="size"
 							/>
 							<FontAwesomeIcon
 								icon={faDollarSign}
-								color={props.price > 2 ? 'white' : '#cccccc'}
+								color={props.price >= 3 ? 'white' : '#cccccc'}
 								className="size"
 							/>
 							<FontAwesomeIcon
 								icon={faDollarSign}
-								color={props.price > 3 ? 'white' : '#cccccc'}
-								className="size"
-							/>
-							<FontAwesomeIcon
-								icon={faDollarSign}
-								color={props.price > 4 ? 'white' : '#cccccc'}
+								color={props.price >= 4 ? 'white' : '#cccccc'}
 								className="size"
 							/>
 						</span>

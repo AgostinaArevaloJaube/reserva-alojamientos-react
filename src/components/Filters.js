@@ -1,4 +1,3 @@
-// Acá importar el el state y el usecontext
 import React, { useContext } from 'react';
 import { FilterContext } from './FilterContext';
 
@@ -45,18 +44,18 @@ const Filter = styled.section`
 	}
 
 	input,
-	select, button {
+	select,
+	button {
 		outline: none;
 		border: none;
 		color: gray;
-		
+
 		&:active {
 			outline: none;
 		}
 	}
 
 	.button {
-		
 	}
 `;
 
@@ -76,9 +75,9 @@ const Filters = () => {
 		setFilter({
 			checkIn: moment(),
 			checkOut: moment().add(1, 'days'),
-			country: undefined,
-			price: undefined,
-			size: undefined
+			country: 'Todos los paises',
+			price: 'Cualquier precio',
+			size: 'Cualquier tamaño'
 		});
 	};
 
@@ -96,19 +95,27 @@ const Filters = () => {
 
 			<Filter>
 				<FontAwesomeIcon icon={faGlobe} color="#a3a2a2" />
-				<select name="country" onChange={handleFilters}>
-					<option>Todos los Paises</option>
-					<option>Argentina</option>
-					<option>Brasil</option>
-					<option>Chile</option>
-					<option>Uruguay</option>
+				<select
+					name="country"
+					onChange={handleFilters}
+					value={filter.country}
+				>
+					<option value="Todos los paises">Todos los Paises</option>
+					<option value="Argentina">Argentina</option>
+					<option value="Brasil">Brasil</option>
+					<option value="Chile">Chile</option>
+					<option value="Uruguay">Uruguay</option>
 				</select>
 			</Filter>
 
 			<Filter>
 				<FontAwesomeIcon icon={faDollarSign} color="#a3a2a2" />
-				<select name="price" onChange={handleFilters}>
-					<option value="0">Cualquier precio</option>
+				<select
+					name="price"
+					onChange={handleFilters}
+					value={filter.price}
+				>
+					<option value="Cualquier precio">Cualquier precio</option>
 					<option value="1">$</option>
 					<option value="2">$$</option>
 					<option value="3">$$$</option>
@@ -118,16 +125,20 @@ const Filters = () => {
 
 			<Filter>
 				<FontAwesomeIcon icon={faBed} color="#a3a2a2" />
-				<select name="size" onChange={handleFilters}>
-					<option value="0">Cualquier tamaño</option>
-					<option value="1">Hotel pequeño</option>
-					<option value="2">Hotel mediano</option>
-					<option value="3">Hotel grande</option>
+				<select
+					name="size"
+					onChange={handleFilters}
+					value={filter.size}
+				>
+					<option value="Cualquier tamaño">Cualquier tamaño</option>
+					<option value="Hotel pequeño">Hotel pequeño</option>
+					<option value="Hotel mediano">Hotel mediano</option>
+					<option value="Hotel grande">Hotel grande</option>
 				</select>
 			</Filter>
 
 			<Filter>
-				<button class="button" onClick={handleReset}>
+				<button className="button" onClick={handleReset}>
 					Reset
 				</button>
 			</Filter>
