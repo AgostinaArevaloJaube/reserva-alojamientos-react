@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { FilterContext } from './FilterContext';
 import styled from 'styled-components';
+import moment from 'moment';
 
 import Card from './Card';
 import hotelsData from '../scripts/data';
@@ -30,7 +31,14 @@ export default function Cards() {
 		3- Esas funciones filtros tienen que comparar el estado actual vs hotelsData, devolviendo true en caso de que la condición se cumpla
 		4- Luego, hacer un filter dentro de una variable, que llame a la funcion validadora y pase como parámetro un hotel traido del hotelsData
 	*/
-	const filterDate = (hotel) => {};
+	const filterDate = (hotel) => {
+		if (
+			filter.checkIn >= moment(hotel.availabilityFrom) &&
+			filter.checkOut <= moment(hotel.availabilityTo)
+		) {
+			return true;
+		}
+	};
 	const filterCountry = (hotel) => {
 		if (
 			filter.country === 'Todos los paises' ||

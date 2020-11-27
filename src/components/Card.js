@@ -160,7 +160,7 @@ function Card(props) {
 					<p>
 						Disponible desde{' '}
 						{moment(props.availabilityFrom).format(format)} hasta{' '}
-						{moment(props.availabilityFrom).format(format)}
+						{moment(props.availabilityTo).format(format)}
 					</p>
 
 					<div className="price">

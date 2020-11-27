@@ -27,7 +27,6 @@ const Header = () => {
 	return (
 		<HeaderContainer>
 			<h1>Hoteles</h1>
-			{/* Acá va a tomar lo que tenga Filters en fecha */}
 			<br />
 			<p>
 				desde el <b>{checkInDateFormat}</b> hasta el{' '}
