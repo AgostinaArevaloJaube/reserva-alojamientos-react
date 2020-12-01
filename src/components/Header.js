@@ -31,8 +31,6 @@ const Header = () => {
 			<p>
 				desde el <b>{checkInDateFormat}</b> hasta el{' '}
 				<b>{checkOutDateFormat} </b>
-				en un hotel de rango {filter.price}, de tamaño {filter.size} en{' '}
-				{filter.country}
 			</p>
 		</HeaderContainer>
 	);

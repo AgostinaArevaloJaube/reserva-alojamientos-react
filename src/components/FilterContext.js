@@ -5,8 +5,8 @@ export const FilterContext = createContext();
 
 export const FilterProvider = (props) => {
 	const [filter, setFilter] = useState({
-		checkIn: moment(),
-		checkOut: moment().add(1, 'days'),
+		checkIn: {},
+		checkOut: {},
 		country: "Todos los paises",
 		price: "Cualquier precio",
 		size: "Cualquier tamaño"

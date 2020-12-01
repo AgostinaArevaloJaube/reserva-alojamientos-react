@@ -25,18 +25,15 @@ const CardsContainer = styled.section`
 export default function Cards() {
 	const [filter, setFilter] = useContext(FilterContext);
 
-	/*
-		1- Traer el estado. ok
-		2- Generar una función validadora que llame a todas las funciones filtros
-		3- Esas funciones filtros tienen que comparar el estado actual vs hotelsData, devolviendo true en caso de que la condición se cumpla
-		4- Luego, hacer un filter dentro de una variable, que llame a la funcion validadora y pase como parámetro un hotel traido del hotelsData
-	*/
 	const filterDate = (hotel) => {
+		// guardar el format
 		if (
-			filter.checkIn.format('YYYY-MM-DD') >=
+			Object.keys(filter.checkIn).length === 0 ||
+			Object.keys(filter.checkOut).length === 0 ||
+			(filter.checkIn.format('YYYY-MM-DD') >=
 				moment(hotel.availabilityFrom).format('YYYY-MM-DD') &&
-			filter.checkOut.format('YYYY-MM-DD') <=
-				moment(hotel.availabilityTo).format('YYYY-MM-DD')
+				filter.checkOut.format('YYYY-MM-DD') <=
+					moment(hotel.availabilityTo).format('YYYY-MM-DD'))
 		) {
 			return true;
 		}
@@ -77,8 +74,12 @@ export default function Cards() {
 	};
 
 	const validate = (hotel) => {
-		return filterDate(hotel);
-		// filterCountry(hotel) && filterPrice(hotel) && filterSize(hotel)
+		return (
+			filterDate(hotel) &&
+			filterCountry(hotel) &&
+			filterPrice(hotel) &&
+			filterSize(hotel)
+		);
 	};
 
 	const hotelList = hotelsData.filter(validate);

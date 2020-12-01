@@ -73,8 +73,8 @@ const Filters = () => {
 
 	const handleReset = (event) => {
 		setFilter({
-			checkIn: moment(),
-			checkOut: moment().add(1, 'days'),
+			checkIn: {},
+			checkOut: {},
 			country: 'Todos los paises',
 			price: 'Cualquier precio',
 			size: 'Cualquier tamaño'
@@ -85,12 +85,30 @@ const Filters = () => {
 		<Navbar>
 			<Filter>
 				<FontAwesomeIcon icon={faSignInAlt} color="#a3a2a2" />
-				<input type="date" name="checkIn" onChange={handleFilters} />
+				<input
+					type="date"
+					name="checkIn"
+					onChange={handleFilters}
+					value={
+						Object.keys(filter.checkIn).length === 0
+							? {}
+							: moment(filter.checkIn).format('YYYY[-]MM[-]DD')
+					}
+				/>
 			</Filter>
 
 			<Filter>
 				<FontAwesomeIcon icon={faSignOutAlt} color="#a3a2a2" />
-				<input type="date" name="checkOut" onChange={handleFilters} />
+				<input
+					type="date"
+					name="checkOut"
+					onChange={handleFilters}
+					value={
+						Object.keys(filter.checkOut).length === 0
+							? {}
+							: moment(filter.checkOut).format('YYYY[-]MM[-]DD')
+					}
+				/>
 			</Filter>
 
 			<Filter>
