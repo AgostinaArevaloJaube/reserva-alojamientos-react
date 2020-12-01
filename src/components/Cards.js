@@ -33,8 +33,10 @@ export default function Cards() {
 	*/
 	const filterDate = (hotel) => {
 		if (
-			filter.checkIn >= moment(hotel.availabilityFrom) &&
-			filter.checkOut <= moment(hotel.availabilityTo)
+			filter.checkIn.format('YYYY-MM-DD') >=
+				moment(hotel.availabilityFrom).format('YYYY-MM-DD') &&
+			filter.checkOut.format('YYYY-MM-DD') <=
+				moment(hotel.availabilityTo).format('YYYY-MM-DD')
 		) {
 			return true;
 		}
@@ -75,7 +77,8 @@ export default function Cards() {
 	};
 
 	const validate = (hotel) => {
-		return filterCountry(hotel) && filterPrice(hotel) && filterSize(hotel);
+		return filterDate(hotel);
+		// filterCountry(hotel) && filterPrice(hotel) && filterSize(hotel)
 	};
 
 	const hotelList = hotelsData.filter(validate);
