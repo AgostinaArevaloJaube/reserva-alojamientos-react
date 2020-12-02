@@ -1,3 +1,4 @@
+// dependencies
 import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,10 +7,7 @@ import {
 	faBed,
 	faDollarSign
 } from '@fortawesome/free-solid-svg-icons';
-// Moment.js
-import moment from 'moment';
-import 'moment/locale/es';
-const format = 'dddd[,] D [de] MMMM [de] YYYY';
+
 
 const CardContainer = styled.section`
 	margin: 2%;
@@ -61,7 +59,7 @@ const CardContainer = styled.section`
 	}
 
 	.locactionContainer {
-		margin: 4%;
+		margin: 2%;
 		display: flex;
 		flex-direction: column;
 
@@ -129,6 +127,7 @@ const CardContainer = styled.section`
 `;
 
 function Card(props) {
+
 	return (
 		<CardContainer>
 			<img className="image" src={props.photo} alt="" />
@@ -156,12 +155,6 @@ function Card(props) {
 						</span>
 						<p>{props.rooms} Habitaciones</p>
 					</div>
-
-					<p>
-						Disponible desde{' '}
-						{moment(props.availabilityFrom).format(format)} hasta{' '}
-						{moment(props.availabilityTo).format(format)}
-					</p>
 
 					<div className="price">
 						<span className="priceIcon">

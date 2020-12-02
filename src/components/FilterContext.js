@@ -1,5 +1,5 @@
+// dependencies
 import React, { useState, createContext } from 'react';
-import moment from 'moment';
 
 export const FilterContext = createContext();
 

@@ -1,9 +1,13 @@
+// dependencies
 import React, { useContext } from 'react';
 import { FilterContext } from './FilterContext';
-import styled from 'styled-components';
 import moment from 'moment';
+import styled from 'styled-components';
 
+// components
 import Card from './Card';
+
+// data
 import hotelsData from '../scripts/data';
 
 const CardsContainer = styled.section`
@@ -23,17 +27,18 @@ const CardsContainer = styled.section`
 `;
 
 export default function Cards() {
-	const [filter, setFilter] = useContext(FilterContext);
+	const [filter] = useContext(FilterContext);
 
 	const filterDate = (hotel) => {
-		// guardar el format
+		const format = 'YYYY-MM-DD';
+
 		if (
 			Object.keys(filter.checkIn).length === 0 ||
 			Object.keys(filter.checkOut).length === 0 ||
-			(filter.checkIn.format('YYYY-MM-DD') >=
-				moment(hotel.availabilityFrom).format('YYYY-MM-DD') &&
-				filter.checkOut.format('YYYY-MM-DD') <=
-					moment(hotel.availabilityTo).format('YYYY-MM-DD'))
+			(filter.checkIn.format(format) >=
+				moment(hotel.availabilityFrom).format(format) &&
+				filter.checkOut.format(format) <=
+					moment(hotel.availabilityTo).format(format))
 		) {
 			return true;
 		}
@@ -89,7 +94,7 @@ export default function Cards() {
 			{hotelList.length > 0 ? (
 				hotelList.map((hotel) => <Card {...hotel} key={hotel.slug} />)
 			) : (
-				<p>No hay hoteles disponibles</p>
+			<p>No hay hoteles que coincidan con la búsqueda seleccionada. Por favor, ¡seguí buscando!</p>
 			)}
 		</CardsContainer>
 	);

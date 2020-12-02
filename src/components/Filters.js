@@ -1,6 +1,6 @@
+// dependencies
 import React, { useContext } from 'react';
 import { FilterContext } from './FilterContext';
-
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -17,10 +17,11 @@ const Navbar = styled.nav`
 	background-color: #457b9d;
 	display: flex;
 	flex-direction: row;
+	align-items: center;
 	justify-content: center;
 	width: 100%;
 
-	@media (max-width: 900px) {
+	@media (max-width: 980px) {
 		flex-direction: column;
 		margin: 2% auto;
 		padding: 1rem;
@@ -37,7 +38,7 @@ const Filter = styled.section`
 	align-items: center;
 	justify-content: center;
 
-	@media (max-width: 900px) {
+	@media (max-width: 980px) {
 		margin: 1% auto;
 		justify-content: flex-start;
 		min-width: 60%;
@@ -46,9 +47,11 @@ const Filter = styled.section`
 	input,
 	select,
 	button {
+		width: 100%;
 		outline: none;
 		border: none;
 		color: gray;
+		cursor: pointer;
 
 		&:active {
 			outline: none;
@@ -56,8 +59,45 @@ const Filter = styled.section`
 	}
 
 	.button {
+		background-color: #f08080;
 	}
 `;
+
+const Button = styled.section`
+	margin: 0.5rem;
+	padding: 0.5rem;
+	max-width: 40%;
+	background-color: #f08080;
+	border-radius: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	@media (max-width: 980px) {
+		margin: 1% auto;
+		justify-content: flex-start;
+		min-width: 40%;
+		text-align: center;
+	}
+
+	button {
+		width: 100%;
+		outline: none;
+		border: none;
+		color: white;
+		cursor: pointer;
+
+		&:active {
+			outline: none;
+		}
+	}
+
+	.button {
+		background-color: #f08080;
+	}
+
+`
+
 
 const Filters = () => {
 	const [filter, setFilter] = useContext(FilterContext);
@@ -94,6 +134,7 @@ const Filters = () => {
 							? {}
 							: moment(filter.checkIn).format('YYYY[-]MM[-]DD')
 					}
+					min={moment().format('YYYY[-]MM[-]DD')}
 				/>
 			</Filter>
 
@@ -155,11 +196,11 @@ const Filters = () => {
 				</select>
 			</Filter>
 
-			<Filter>
+			<Button>
 				<button className="button" onClick={handleReset}>
 					Reset
 				</button>
-			</Filter>
+			</Button>
 		</Navbar>
 	);
 };

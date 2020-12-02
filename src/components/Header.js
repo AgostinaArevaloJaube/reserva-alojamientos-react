@@ -1,9 +1,9 @@
+// dependencies
 import React, { useContext } from 'react';
 import { FilterContext } from './FilterContext';
-
 import styled from 'styled-components';
 
-// Moment.js
+// moment.js
 import moment from 'moment';
 import 'moment/locale/es';
 moment.locale('es');
@@ -19,10 +19,42 @@ const HeaderContainer = styled.header`
 `;
 
 const Header = () => {
-	const [filter, setFilter] = useContext(FilterContext);
+	const [filter] = useContext(FilterContext);
 	const format = 'dddd[,] D [de] MMMM [de] YYYY';
 	const checkInDateFormat = moment(filter.checkIn).format(format);
 	const checkOutDateFormat = moment(filter.checkOut).format(format);
+
+	const setFilterCountryText = (country) => {
+		return country === 'Todos los paises' ? false : `Destino: ${country}`;
+	};
+
+	const setFilterPriceText = (price) => {
+		switch (price) {
+			case '1':
+				return 'Precio de los hoteles: económicos ';
+			case '2':
+				return 'Precio de los hoteles: standards';
+			case '3':
+				return 'Precio de los hoteles: distinguidos';
+			case '4':
+				return 'Precio de los hoteles: lujosos ';
+			default:
+				return false;
+		}
+	};
+
+	const setFilterSizeText = (size) => {
+		switch (size) {
+			case 'Hotel pequeños':
+				return 'Tamaño de los hoteles: pequeños ';
+			case 'Hotel mediano':
+				return 'Tamaño de los hoteles: medianos ';
+			case 'Hotel grande':
+				return 'Tamaño de los hoteles: grandes ';
+			default:
+				return false;
+		}
+	};
 
 	return (
 		<HeaderContainer>
@@ -32,6 +64,9 @@ const Header = () => {
 				desde el <b>{checkInDateFormat}</b> hasta el{' '}
 				<b>{checkOutDateFormat} </b>
 			</p>
+			<b>{setFilterCountryText(filter.country)}</b>
+			<b>{setFilterPriceText(filter.price)}</b>
+			<b>{setFilterSizeText(filter.size)}</b>
 		</HeaderContainer>
 	);
 };
