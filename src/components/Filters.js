@@ -95,9 +95,7 @@ const Button = styled.section`
 	.button {
 		background-color: #f08080;
 	}
-
-`
-
+`;
 
 const Filters = () => {
 	const [filter, setFilter] = useContext(FilterContext);
@@ -134,7 +132,6 @@ const Filters = () => {
 							? {}
 							: moment(filter.checkIn).format('YYYY[-]MM[-]DD')
 					}
-					min={moment().format('YYYY[-]MM[-]DD')}
 				/>
 			</Filter>
 

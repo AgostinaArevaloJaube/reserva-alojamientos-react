@@ -24,21 +24,25 @@ const CardsContainer = styled.section`
 		padding: 1rem;
 		width: 100%;
 	}
+
+	.errorMessage {
+		color: #f08080;
+		text-align: center;
+	}
 `;
 
 export default function Cards() {
 	const [filter] = useContext(FilterContext);
+	const format = 'YYYY-MM-DD';
+	const checkInDate = moment(filter.checkIn).format(format);
+	const checkOutDate = moment(filter.checkOut).format(format);
 
 	const filterDate = (hotel) => {
-		const format = 'YYYY-MM-DD';
-
 		if (
 			Object.keys(filter.checkIn).length === 0 ||
 			Object.keys(filter.checkOut).length === 0 ||
-			(filter.checkIn.format(format) >=
-				moment(hotel.availabilityFrom).format(format) &&
-				filter.checkOut.format(format) <=
-					moment(hotel.availabilityTo).format(format))
+			(checkInDate >= moment(hotel.availabilityFrom).format(format) &&
+				checkOutDate <= moment(hotel.availabilityTo).format(format))
 		) {
 			return true;
 		}
@@ -89,13 +93,35 @@ export default function Cards() {
 
 	const hotelList = hotelsData.filter(validate);
 
-	return (
-		<CardsContainer>
-			{hotelList.length > 0 ? (
-				hotelList.map((hotel) => <Card {...hotel} key={hotel.slug} />)
-			) : (
-			<p>No hay hoteles que coincidan con la búsqueda seleccionada. Por favor, ¡seguí buscando!</p>
-			)}
-		</CardsContainer>
-	);
+	const displayHotels = (hotelList) => {
+		const today = moment().format(format);
+
+		if (hotelList.length === 0) {
+			return (
+				<p className="errorMessage">
+					No hay hoteles que coincidan con la búsqueda seleccionada.
+					Por favor, ¡seguí buscando!
+				</p>
+			);
+		} else if (checkOutDate < checkInDate) {
+			return (
+				<p className="errorMessage">
+					Por favor seleccioná una fecha de check-out posterior a la
+					fecha de check-in
+				</p>
+			);
+		} else if (checkInDate < today) {
+			return (
+				<p className="errorMessage">
+					Por favor seleccioná una fecha de check-in igual o posterior
+					al día de hoy
+				</p>
+			);
+		} else
+			return hotelList.map((hotel) => (
+				<Card {...hotel} key={hotel.slug} />
+			));
+	};
+
+	return <CardsContainer>{displayHotels(hotelList)}</CardsContainer>;
 }
