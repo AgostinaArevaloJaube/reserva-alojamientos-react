@@ -63,7 +63,7 @@ const Filter = styled.section`
 	}
 `;
 
-const Button = styled.section`
+const Button = styled.div`
 	margin: 0.5rem;
 	padding: 0.5rem;
 	max-width: 40%;
