@@ -37,12 +37,30 @@ export default function Cards() {
 	const checkInDate = moment(filter.checkIn).format(format);
 	const checkOutDate = moment(filter.checkOut).format(format);
 
+	const compareDates = (availabilityFrom, availabilityTo) => {
+		return (
+			checkInDate >= moment(availabilityFrom).format(format) &&
+			checkOutDate <= moment(availabilityTo).format(format)
+		);
+	};
+	const compareSmallSize = (rooms) => {
+		return filter.size === 'Hotel pequeño' && rooms <= 10;
+	};
+
+	const compareMediumSize = (rooms) => {
+		return filter.size === 'Hotel mediano' && rooms <= 20 && rooms >= 10;
+	};
+
+	const compareBigSize = (rooms) => {
+		return filter.size === 'Hotel grande' && rooms >= 20;
+	};
+
+	// filters functions
 	const filterDate = (hotel) => {
 		return (
 			Object.keys(filter.checkIn).length === 0 ||
 			Object.keys(filter.checkOut).length === 0 ||
-			(checkInDate >= moment(hotel.availabilityFrom).format(format) &&
-				checkOutDate <= moment(hotel.availabilityTo).format(format))
+			compareDates(hotel.availabilityFrom, hotel.availabilityTo)
 		);
 	};
 	const filterCountry = (hotel) => {
@@ -62,11 +80,9 @@ export default function Cards() {
 	const filterSize = (hotel) => {
 		return (
 			filter.size === 'Cualquier tamaño' ||
-			(filter.size === 'Hotel pequeño' && hotel.rooms <= 10) ||
-			(filter.size === 'Hotel mediano' &&
-				hotel.rooms <= 20 &&
-				hotel.rooms >= 10) ||
-			(filter.size === 'Hotel grande' && hotel.rooms >= 20)
+			compareSmallSize(hotel.rooms) ||
+			compareMediumSize(hotel.rooms) ||
+			compareBigSize(hotel.room)
 		);
 	};
 
@@ -99,8 +115,8 @@ export default function Cards() {
 				</p>
 			);
 		} else if (checkInDate < today) {
-			return (
-				alert('Por favor seleccioná una fecha de check-in igual o posterior al día de hoy')
+			return alert(
+				'Por favor seleccioná una fecha de check-in igual o posterior al día de hoy'
 			);
 		} else
 			return hotelList.map((hotel) => (
