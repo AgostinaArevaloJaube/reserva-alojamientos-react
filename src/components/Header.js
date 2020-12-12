@@ -45,7 +45,7 @@ const Header = () => {
 
 	const setFilterSizeText = (size) => {
 		switch (size) {
-			case 'Hotel pequeños':
+			case 'Hotel pequeño':
 				return 'Tamaño de los hoteles: pequeños ';
 			case 'Hotel mediano':
 				return 'Tamaño de los hoteles: medianos ';
