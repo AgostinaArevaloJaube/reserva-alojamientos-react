@@ -8,8 +8,7 @@ import {
 	faDollarSign
 } from '@fortawesome/free-solid-svg-icons';
 
-
-const CardContainer = styled.section`
+const CardContainer = styled.article`
 	margin: 2%;
 	width: 28%;
 	height: 100%;
@@ -127,16 +126,19 @@ const CardContainer = styled.section`
 `;
 
 function Card(props) {
-
 	return (
 		<CardContainer>
-			<img className="image" src={props.photo} alt="" />
+			<img
+				className="image"
+				src={props.photo}
+				alt={`Imagenes del hotel ${props.name}`}
+			/>
 
-			<section className="infoContainer">
-				<h1 className="title">{props.name}</h1>
+			<div className="infoContainer">
+				<h2 className="title">{props.name}</h2>
 				<p>{props.description}</p>
 
-				<section className="locactionContainer">
+				<div className="locactionContainer">
 					<div className="iconContainer">
 						<span className="icon">
 							<FontAwesomeIcon
@@ -180,8 +182,8 @@ function Card(props) {
 							/>
 						</span>
 					</div>
-				</section>
-			</section>
+				</div>
+			</div>
 
 			<button className="button">Reservar</button>
 		</CardContainer>
