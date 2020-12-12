@@ -38,48 +38,36 @@ export default function Cards() {
 	const checkOutDate = moment(filter.checkOut).format(format);
 
 	const filterDate = (hotel) => {
-		if (
+		return (
 			Object.keys(filter.checkIn).length === 0 ||
 			Object.keys(filter.checkOut).length === 0 ||
 			(checkInDate >= moment(hotel.availabilityFrom).format(format) &&
 				checkOutDate <= moment(hotel.availabilityTo).format(format))
-		) {
-			return true;
-		}
+		);
 	};
 	const filterCountry = (hotel) => {
-		if (
+		return (
 			filter.country === 'Todos los paises' ||
 			filter.country === hotel.country
-		) {
-			return true;
-		} else {
-			return false;
-		}
+		);
 	};
 
 	const filterPrice = (hotel) => {
-		if (
+		return (
 			filter.price === 'Cualquier precio' ||
 			Number(filter.price) === hotel.price
-		) {
-			return true;
-		} else {
-			return false;
-		}
+		);
 	};
 
 	const filterSize = (hotel) => {
-		if (
+		return (
 			filter.size === 'Cualquier tamaño' ||
 			(filter.size === 'Hotel pequeño' && hotel.rooms <= 10) ||
 			(filter.size === 'Hotel mediano' &&
 				hotel.rooms <= 20 &&
 				hotel.rooms >= 10) ||
 			(filter.size === 'Hotel grande' && hotel.rooms >= 20)
-		) {
-			return true;
-		}
+		);
 	};
 
 	const validate = (hotel) => {
@@ -112,10 +100,7 @@ export default function Cards() {
 			);
 		} else if (checkInDate < today) {
 			return (
-				<p className="errorMessage">
-					Por favor seleccioná una fecha de check-in igual o posterior
-					al día de hoy
-				</p>
+				alert('Por favor seleccioná una fecha de check-in igual o posterior al día de hoy')
 			);
 		} else
 			return hotelList.map((hotel) => (
