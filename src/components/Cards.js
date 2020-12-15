@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 // components
 import Card from './Card';
-import TransitionsModal from './Modal';
+import DateErrorModal from './DateErrorModal';
 
 // data
 import hotelsData from '../scripts/data';
@@ -127,10 +127,7 @@ export default function Cards() {
 			);
 		} else if (checkInDate < today) {
 			return (
-				<TransitionsModal
-					handleClose={handleCloseModal}
-					open={open}
-				/>
+				<DateErrorModal handleClose={handleCloseModal} open={open} />
 			);
 		} else
 			return hotelList.map((hotel) => (

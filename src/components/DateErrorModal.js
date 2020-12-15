@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-export default function TransitionsModal({ handleClose, open }) {
+export default function DateErrorModal({ handleClose, open }) {
 	const classes = useStyles();
 	return (
 		<div>
