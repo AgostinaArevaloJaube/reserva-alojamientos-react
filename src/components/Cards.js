@@ -1,11 +1,12 @@
 // dependencies
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { FilterContext } from './FilterContext';
 import moment from 'moment';
 import styled from 'styled-components';
 
 // components
 import Card from './Card';
+import TransitionsModal from './Modal';
 
 // data
 import hotelsData from '../scripts/data';
@@ -36,6 +37,8 @@ export default function Cards() {
 	const format = 'YYYY-MM-DD';
 	const checkInDate = moment(filter.checkIn).format(format);
 	const checkOutDate = moment(filter.checkOut).format(format);
+	const today = moment().format(format);
+	const [open, setOpen] = useState(true);
 
 	const compareDates = (availabilityFrom, availabilityTo) => {
 		return (
@@ -97,9 +100,17 @@ export default function Cards() {
 
 	const hotelList = hotelsData.filter(validate);
 
-	const displayHotels = (hotelList) => {
-		const today = moment().format(format);
+	const handleCloseModal = () => {
+		setOpen(false);
+	};
 
+	useEffect(() => {
+		return () => {
+			setOpen(true);
+		};
+	}, [filter.checkIn]);
+
+	const displayHotels = (hotelList) => {
 		if (hotelList.length === 0) {
 			return (
 				<p className="errorMessage">
@@ -110,13 +121,16 @@ export default function Cards() {
 		} else if (checkOutDate < checkInDate) {
 			return (
 				<p className="errorMessage">
-					Por favor seleccioná una fecha de check-out posterior a la
-					fecha de check-in
+					Por favor seleccioná una fecha de check-out posterior a
+					lafecha de check-in
 				</p>
 			);
 		} else if (checkInDate < today) {
-			return alert(
-				'Por favor seleccioná una fecha de check-in igual o posterior al día de hoy'
+			return (
+				<TransitionsModal
+					handleClose={handleCloseModal}
+					open={open}
+				/>
 			);
 		} else
 			return hotelList.map((hotel) => (

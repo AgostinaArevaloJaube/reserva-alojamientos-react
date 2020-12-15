@@ -9,7 +9,7 @@ export const FilterProvider = (props) => {
 		checkOut: {},
 		country: "Todos los paises",
 		price: "Cualquier precio",
-		size: "Cualquier tamaño"
+		size: "Cualquier tamaño",
 	});
 
 	return (
