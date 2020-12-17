@@ -55,6 +55,7 @@ const CardContainer = styled.article`
 		width: 100%;
 		background-color: #457b9d;
 		border: none;
+		cursor: pointer;
 	}
 
 	.locactionContainer {
