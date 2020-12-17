@@ -78,7 +78,7 @@ const CardContainer = styled.article`
 		}
 
 		@media (max-width: 1200px) {
-			width: 90%;
+			width: 100%;
 			flex-direction: column;
 		}
 	}
