@@ -8,12 +8,10 @@ import { FilterProvider } from './components/FilterContext';
 
 const App = () => {
 	return (
-		<>
 			<FilterProvider>
 				<Header />
 				<Cards />
 			</FilterProvider>
-		</>
 	);
 };
 
